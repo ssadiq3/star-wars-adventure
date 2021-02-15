@@ -1,0 +1,198 @@
+{
+  "startingRoom": "Tatooine",
+  "endingRoom": "Jedi Temple",
+  "rooms": [
+    {
+      "name": "Tatooine",
+      "description": "You are on Tatooine, a desert planet isolated from the galaxy",
+      "items": [
+        {
+          "itemName": "Spaceship keys",
+          "itemDescription": "Use these keys to fly your spaceship across planets"
+        }
+      ],
+      "directions": [
+        {
+          "directionName": "East",
+          "room": "Jabba's Cave"
+        }
+      ]
+    },
+    {
+      "name": "Jabba's Cave",
+      "description": "You are in Jabba The Hutt's cave, he is a crime lord who rules over the planet Tatooine",
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Tatooine"
+        },
+        {
+          "directionName": "Northeast",
+          "room": "Alderaan"
+        },
+        {
+          "directionName": "Southeast",
+          "room": "Death Star"
+        }
+      ]
+    },
+    {
+      "name": "Alderaan",
+      "description": "You are at Alderaan. You hear this planet is in danger of being destroyed by the Empire",
+      "directions": [
+        {
+          "directionName": "South",
+          "room": "Death Star"
+        },
+        {
+          "directionName": "Southwest",
+          "room": "Jabba's Cave"
+        },
+        {
+          "directionName": "East",
+          "room": "Dagobah"
+        }
+      ]
+    },
+    {
+      "name": "Dagobah",
+      "description": "You are on Dagobah, here is the renowned Jedi Master Yoda",
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Alderaan"
+        },
+        {
+          "directionName": "East",
+          "room": "Yoda's Forest"
+        },
+        {
+          "directionName": "Northeast",
+          "room": "Hoth"
+        }
+      ]
+    },
+    {
+      "name": "Yoda's Forest",
+      "description": "You have found Yoda. He tells you you must destroy the Death Star and locate the Jedi Temple on Coruscant to become a Jedi Master",
+      "items": [
+        {
+          "itemName": "Light saber",
+          "itemDescription": "The most renowned weapon of a Jedi, use this to defeat enemies that you encounter"
+        }
+      ],
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Dagobah"
+        }
+      ]
+    },
+    {
+      "name": "Death Star",
+      "description": "You're on the death star! This is an imperial weapon capable of destroying rebel planets. There are many stormtroopers here- a weapon may be of use",
+      "items": [
+        {
+          "itemName": "Death Star Plans",
+          "itemDescription": "There are plans here that lead to the control room downstairs"
+        }
+      ],
+      "directions": [
+        {
+          "directionName": "North",
+          "room": "Alderaan"
+        },
+        {
+          "directionName": "Down",
+          "room": "Control Room"
+        },
+        {
+          "directionName": "West",
+          "room": "Hoth"
+        }
+      ]
+    },
+    {
+      "name": "Control Room",
+      "description": "This is the control room for the Death Star, you can destroy it from here.",
+      "directions": [
+        {
+          "directionName": "Up",
+          "room": "Death Star"
+        }
+      ]
+    },
+    {
+      "name": "Hoth",
+      "description": "Here is the rebel base, where you can inform them that the Death Star has been destroyed.",
+      "items": [
+        {
+          "itemName": "Rebel uniform",
+          "itemDescription": "The uniform of the rebel alliance members"
+        }
+      ],
+      "directions": [
+        {
+          "directionName": "Southwest",
+          "room": "Dagobah"
+        },
+        {
+          "directionName": "East",
+          "room": "Naboo"
+        }
+      ]
+    },
+    {
+      "name": "Naboo",
+      "description": "Naboo is a planet home to the Gungans and ruled by very nice queens who know the galaxy's directions very well",
+      "items": [
+        {
+          "itemName": "Map",
+          "itemDescription": "A map of the planets in the galaxy that lead to Coruscant"
+        },
+        {
+          "itemName": "Cloak",
+          "itemDescription": "After hearing about your bravery on the Death Star, the Queen of Naboo offers you a Jedi cloak"
+        }
+      ],
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Hoth"
+        },
+        {
+          "directionName": "North",
+          "room": "Coruscant"
+        }
+      ]
+    },
+    {
+      "name": "Coruscant",
+      "description": "You have reached Coruscant, on this planet is the primary Jedi Temple",
+      "directions": [
+        {
+          "directionName": "South",
+          "room": "Naboo"
+        },
+        {
+          "directionName": "East",
+          "room": "Jedi Temple"
+        }
+      ]
+    },
+    {
+      "name": "Jedi Temple",
+      "description": "Congratulations! You've made it to the Jedi Temple where you can become a Jedi Master. Drop your cloak and lightsaber to to prove you are a padawan ready for training",
+      "directions": [
+        {
+          "directionName": "South",
+          "room": "Naboo"
+        },
+        {
+          "directionName": "East",
+          "room": "Jedi Temple"
+        }
+      ]
+    }
+  ]
+}
