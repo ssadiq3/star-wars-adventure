@@ -7,7 +7,7 @@
       "description": "You are on Tatooine, a desert planet isolated from the galaxy",
       "items": [
         {
-          "itemName": "Spaceship keys",
+          "itemName": "keys",
           "itemDescription": "Use these keys to fly your spaceship across planets"
         }
       ],
@@ -77,7 +77,7 @@
       "description": "You have found Yoda. He tells you you must destroy the Death Star and locate the Jedi Temple on Coruscant to become a Jedi Master",
       "items": [
         {
-          "itemName": "Light saber",
+          "itemName": "Lightsaber",
           "itemDescription": "The most renowned weapon of a Jedi, use this to defeat enemies that you encounter"
         }
       ],
@@ -93,7 +93,7 @@
       "description": "You're on the death star! This is an imperial weapon capable of destroying rebel planets. There are many stormtroopers here- a weapon may be of use",
       "items": [
         {
-          "itemName": "Death Star Plans",
+          "itemName": "Plans",
           "itemDescription": "There are plans here that lead to the control room downstairs"
         }
       ],
@@ -127,7 +127,7 @@
       "description": "Here is the rebel base, where you can inform them that the Death Star has been destroyed.",
       "items": [
         {
-          "itemName": "Rebel uniform",
+          "itemName": "Uniform",
           "itemDescription": "The uniform of the rebel alliance members"
         }
       ],

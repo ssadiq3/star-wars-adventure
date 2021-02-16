@@ -1,16 +1,18 @@
 package student.adventure;
 
+import java.util.Map;
+
 public class Direction {
-    private String name;
+    private String directionName;
     private String room;
 
     public Direction(String name, String room) {
-        this.name = name;
+        directionName = name;
         this.room = room;
     }
 
-    public String getName() {
-        return name;
+    public String getDirectionName() {
+        return directionName;
     }
 
     public String getRoom() {
