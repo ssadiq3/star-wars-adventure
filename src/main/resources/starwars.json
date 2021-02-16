@@ -78,7 +78,7 @@
       "description": "You have found Yoda. He tells you you must destroy the Death Star and locate the Jedi Temple on Coruscant to become a Jedi Master",
       "items": [
         {
-          "itemName": "Lightsaber",
+          "itemName": "lightsaber",
           "itemDescription": "The most renowned weapon of a Jedi, use this to defeat enemies that you encounter"
         }
       ],
@@ -94,7 +94,7 @@
       "description": "You're on the death star! This is an imperial weapon capable of destroying rebel planets. There are many stormtroopers here- a weapon may be of use",
       "items": [
         {
-          "itemName": "Plans",
+          "itemName": "plans",
           "itemDescription": "There are plans here that lead to the control room downstairs"
         }
       ],
@@ -128,7 +128,7 @@
       "description": "Here is the rebel base, where you can inform them that the Death Star has been destroyed.",
       "items": [
         {
-          "itemName": "Uniform",
+          "itemName": "uniform",
           "itemDescription": "The uniform of the rebel alliance members"
         }
       ],
@@ -148,11 +148,11 @@
       "description": "Naboo is a planet home to the Gungans and ruled by very nice queens who know the galaxy's directions very well",
       "items": [
         {
-          "itemName": "Map",
+          "itemName": "map",
           "itemDescription": "A map of the planets in the galaxy that lead to Coruscant"
         },
         {
-          "itemName": "Cloak",
+          "itemName": "cloak",
           "itemDescription": "After hearing about your bravery on the Death Star, the Queen of Naboo offers you a Jedi cloak"
         }
       ],

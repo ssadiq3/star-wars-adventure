@@ -8,10 +8,10 @@ import java.io.FileReader;
 import java.util.*;
 
 public class GameEngine {
-    private Layout layout;
+    protected Layout layout;
     public static Map<String, Room> roomMap;
-    public  static String currentRoom;
-    private List<Item> inventory;
+    public static String currentRoom;
+    protected List<Item> inventory;
 
     public GameEngine(String file) throws FileNotFoundException {
         if (file == null || !(file.equals("src/main/resources/starwars.json"))) {
@@ -30,11 +30,11 @@ public class GameEngine {
 
     public String checkCommand(String action, String second) {
         if (action.equals("go")) {
-            return goDirection(second);
+            return goDirection(second.toLowerCase());
         } if (action.equals("take")) {
-            return takeItem(second);
+            return takeItem(second.toLowerCase());
         } if (action.equals("drop")) {
-            return dropItem(second);
+            return dropItem(second.toLowerCase());
         } if (action.equals("examine")) {
             return examine();
         } if (action.equals("quit") || action.equals("exit")) {
