@@ -42,7 +42,7 @@
       "directions": [
         {
           "directionName": "South",
-          "room": "Death Star"
+          "room": "The Death Star"
         },
         {
           "directionName": "Southwest",
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "name": "Death Star",
+      "name": "The Death Star",
       "description": "You're on the death star! This is an imperial weapon capable of destroying rebel planets. There are many stormtroopers here- a weapon may be of use",
       "items": [
         {
@@ -118,7 +118,7 @@
       "directions": [
         {
           "directionName": "Up",
-          "room": "Death Star"
+          "room": "The Death Star"
         }
       ]
     },

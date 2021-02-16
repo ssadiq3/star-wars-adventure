@@ -5,10 +5,7 @@ import com.google.gson.stream.JsonReader;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameEngine {
     private Layout layout;
@@ -31,7 +28,7 @@ public class GameEngine {
         }
     }
 
-    public static boolean isValidAction(String action, String second) {
+    private boolean isValidAction(String action, String second) {
         if (action.equals("go") || action.equals("examine") || action.equals("take") || action.equals("drop")
         || action.equals("quit") || action.equals("exit")) {
             return true;
@@ -39,19 +36,19 @@ public class GameEngine {
         return false;
     }
 
-    public static boolean isValidDirection(String direction) {
+    private boolean isValidDirection(String direction) {
         for (Direction posDirection : roomMap.get(currentRoom).getDirections()) {
-            if (direction.equals(posDirection)) {
+            if (direction.equals(posDirection.getDirectionName().toLowerCase())) {
                 return true;
             }
         }
         return false;
     }
 
-    private static Enum goDirection(String direction) {
+    private Enum goDirection(String direction) {
         if (isValidDirection(direction)) {
             for (Direction posDirection : roomMap.get(currentRoom).getDirections()) {
-                if (direction.equals(posDirection.getDirectionName())) {
+                if (direction.equalsIgnoreCase(posDirection.getDirectionName())) {
                     currentRoom = posDirection.getRoom();
                     return CheckGame.VALID_GO;
                 }
@@ -59,4 +56,41 @@ public class GameEngine {
         }
         return CheckGame.INVALID_GO;
     }
+    private boolean isValidTake(String item) {
+        for (Item posItem : roomMap.get(currentRoom).getItems()) {
+            if (item.equalsIgnoreCase(posItem.getItemName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private Enum takeItem(String item) {
+        for (Item posItem : roomMap.get(currentRoom).getItems()) {
+            if (item.equalsIgnoreCase(posItem.getItemName())) {
+                inventory.add(posItem);
+                roomMap.get(currentRoom).getItems().remove(posItem);
+                return CheckGame.VALID_TAKE;
+            }
+        }
+        return CheckGame.INVALID_TAKE;
+    }
+    private boolean isValidDrop(String item) {
+        for (Item posItem : inventory) {
+            if (item.equalsIgnoreCase(posItem.getItemName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private Enum dropItem(String item) {
+        for (Item posItem : inventory) {
+            if (item.equalsIgnoreCase(posItem.getItemName())) {
+                inventory.remove(posItem);
+                roomMap.get(currentRoom).getItems().add(posItem);
+                return CheckGame.VALID_DROP;
+            }
+        }
+        return CheckGame.INVALID_DROP;
+    }
+
 }
