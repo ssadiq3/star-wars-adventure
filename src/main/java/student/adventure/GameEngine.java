@@ -28,12 +28,18 @@ public class GameEngine {
         }
     }
 
-    private boolean isValidAction(String action, String second) {
-        if (action.equals("go") || action.equals("examine") || action.equals("take") || action.equals("drop")
-        || action.equals("quit") || action.equals("exit")) {
-            return true;
+    private Enum isValidAction(String action, String second) {
+        if (action.equals("go")) {
+            return goDirection(second);
+        } if (action.equals("take")) {
+            return takeItem(second);
+        } if (action.equals("drop")) {
+            return dropItem(second);
+        } if (action.equals("examine")) {
+            examine();
+            return CheckGame.VALID_EXAMINE;
         }
-        return false;
+        return CheckGame.INVALID_COMMAND;
     }
 
     private boolean isValidDirection(String direction) {
@@ -91,6 +97,12 @@ public class GameEngine {
             }
         }
         return CheckGame.INVALID_DROP;
+    }
+    public String examine() {
+        return "You are in " + roomMap.get(currentRoom).getName() + "\n" +
+                "Your current items: " + inventory.toString() + "\n" +
+                "Items available in the room: " + roomMap.get(currentRoom).getItems().toString() + "\n" +
+                "You can go in these directions: " + roomMap.get(currentRoom).getDirections().toString();
     }
 
 }

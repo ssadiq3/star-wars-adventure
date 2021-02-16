@@ -7,5 +7,6 @@ public enum CheckGame {
     INVALID_TAKE,
     VALID_TAKE,
     INVALID_DROP,
-    VALID_DROP
+    VALID_DROP,
+    VALID_EXAMINE
 }
