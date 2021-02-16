@@ -9,12 +9,12 @@ import java.util.*;
 
 public class GameEngine {
     private Layout layout;
-    private static Map<String, Room> roomMap;
-    private static String currentRoom;
+    public static Map<String, Room> roomMap;
+    public  static String currentRoom;
     private List<Item> inventory;
 
     public GameEngine(String file) throws FileNotFoundException {
-        if (!(file.equals("src/main/resources/starwars.json"))) {
+        if (file == null || !(file.equals("src/main/resources/starwars.json"))) {
             throw new IllegalArgumentException();
         }
         Gson gson = new Gson();
@@ -28,7 +28,7 @@ public class GameEngine {
         }
     }
 
-    private Enum isValidAction(String action, String second) {
+    public String checkCommand(String action, String second) {
         if (action.equals("go")) {
             return goDirection(second);
         } if (action.equals("take")) {
@@ -36,10 +36,11 @@ public class GameEngine {
         } if (action.equals("drop")) {
             return dropItem(second);
         } if (action.equals("examine")) {
-            examine();
-            return CheckGame.VALID_EXAMINE;
+            return examine();
+        } if (action.equals("quit") || action.equals("exit")) {
+            return action;
         }
-        return CheckGame.INVALID_COMMAND;
+        return "I can't complete that action!";
     }
 
     private boolean isValidDirection(String direction) {
@@ -51,58 +52,87 @@ public class GameEngine {
         return false;
     }
 
-    private Enum goDirection(String direction) {
+    private String goDirection(String direction) {
         if (isValidDirection(direction)) {
             for (Direction posDirection : roomMap.get(currentRoom).getDirections()) {
                 if (direction.equalsIgnoreCase(posDirection.getDirectionName())) {
                     currentRoom = posDirection.getRoom();
-                    return CheckGame.VALID_GO;
+                    return "Went";
                 }
             }
         }
-        return CheckGame.INVALID_GO;
+        return "I can't go " + direction +"!";
     }
-    private boolean isValidTake(String item) {
-        for (Item posItem : roomMap.get(currentRoom).getItems()) {
-            if (item.equalsIgnoreCase(posItem.getItemName())) {
-                return true;
-            }
+    private String takeItem(String item) {
+        if (roomMap.get(currentRoom).getItems() == null || roomMap.get(currentRoom).getItems().size() == 0) {
+            return "This room does not have any items!";
         }
-        return false;
-    }
-    private Enum takeItem(String item) {
         for (Item posItem : roomMap.get(currentRoom).getItems()) {
             if (item.equalsIgnoreCase(posItem.getItemName())) {
                 inventory.add(posItem);
                 roomMap.get(currentRoom).getItems().remove(posItem);
-                return CheckGame.VALID_TAKE;
+                return "Took";
             }
         }
-        return CheckGame.INVALID_TAKE;
+        return item + " isn't in the room!";
     }
-    private boolean isValidDrop(String item) {
+    private String dropItem(String item) {
+        if (inventory.size() == 0) {
+            return "You have no items to drop!";
+        }
         for (Item posItem : inventory) {
             if (item.equalsIgnoreCase(posItem.getItemName())) {
+                inventory.remove(posItem);
+                roomMap.get(currentRoom).getItems().add(posItem);
+                return "Dropped";
+            }
+        }
+        return "You don't have " + item + "!";
+    }
+    public String examine() {
+        return "You are in " + roomMap.get(currentRoom).getName() + "\n" +
+                "Description: " + roomMap.get(currentRoom).getDescription() + "\n" +
+                "Your current items: " + printItems(inventory) + "\n" +
+                "Items available in the room: " + printItemsDescription(roomMap.get(currentRoom).getItems()) + "\n" +
+                "You can go in these directions: " + printDirections(roomMap.get(currentRoom).getDirections());
+    }
+    public boolean isComplete(String result) {
+        if (result.equals("Went")) {
+            if (roomMap.get(currentRoom).getName().equals("Jedi Temple")) {
                 return true;
             }
         }
         return false;
     }
-    private Enum dropItem(String item) {
-        for (Item posItem : inventory) {
-            if (item.equalsIgnoreCase(posItem.getItemName())) {
-                inventory.remove(posItem);
-                roomMap.get(currentRoom).getItems().add(posItem);
-                return CheckGame.VALID_DROP;
+    public String printItems(List<Item> list) {
+        String toReturn = "";
+        if (list != null) {
+            for (Item item : list) {
+                toReturn += item.getItemName() + ", ";
             }
         }
-        return CheckGame.INVALID_DROP;
+        return toReturn.trim();
     }
-    public String examine() {
-        return "You are in " + roomMap.get(currentRoom).getName() + "\n" +
-                "Your current items: " + inventory.toString() + "\n" +
-                "Items available in the room: " + roomMap.get(currentRoom).getItems().toString() + "\n" +
-                "You can go in these directions: " + roomMap.get(currentRoom).getDirections().toString();
+    public String printItemsDescription(List<Item> list) {
+        String toReturn = "";
+        if (list != null) {
+            for (Item item : list) {
+                toReturn += item.getItemName() + "-" + item.getItemDescription() + ", ";
+            }
+        }
+        return toReturn.trim();
+    }
+    public String printDirections(List<Direction> list) {
+        String toReturn = "";
+        if (list != null) {
+            for (Direction direction : list) {
+                toReturn += direction.getDirectionName() + ", ";
+            }
+        }
+        return toReturn.trim();
+    }
+    public String getIntro() {
+        return layout.getIntro();
     }
 
 }
