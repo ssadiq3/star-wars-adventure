@@ -8,10 +8,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 import static org.junit.Assert.assertEquals;
-import static student.adventure.GameEngine.currentRoom;
 
 public class GameEngineTest {
     private GameEngine game;
@@ -61,6 +59,12 @@ public class GameEngineTest {
     public void testInvalidDropNotInInventory() {
         game.checkCommand("take", "keys");
         assertEquals("You don't have map!", game.checkCommand("drop", "map"));
+    }
+    @Test
+    public void testDropInRoomWithNoItems() {
+        game.checkCommand("take", "keys");
+        game.checkCommand("go", "East");
+        assertEquals("Dropped", game.checkCommand("drop", "keys"));
     }
     @Test
     public void testInvalidTakeNoItemsInRoom() {
