@@ -17,19 +17,7 @@ public class GameEngineTest {
     public void setUp() throws FileNotFoundException {
         game = new GameEngine("src/main/resources/starwars.json");
     }
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullFile() throws FileNotFoundException {
-        game = new GameEngine(null);
-        thrown.expect(IllegalArgumentException.class);
-    }
-    @Test(expected = IllegalArgumentException.class)
-    public void testEmptyFile() throws FileNotFoundException {
-        game = new GameEngine("");
-        thrown.expect(IllegalArgumentException.class);
-    }
     @Test
     public void testValidGo() {
         assertEquals("Went", game.checkCommand("go", "East"));

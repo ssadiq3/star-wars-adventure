@@ -23,7 +23,7 @@ public class GameEngine {
         //deserialize into layout class
         layout = gson.fromJson(reader, Layout.class);
         roomMap = new HashMap<>();
-        currentRoom = "Tatooine"; //first room
+        currentRoom = layout.getStartingRoom(); //first room
         inventory = new ArrayList<>(); //starts empty
         //fill roomMap with room name and room object pairs
         for (Room room : layout.getRooms()) {
@@ -142,7 +142,7 @@ public class GameEngine {
      */
     public String examine() {
         //use below print methods to return status of game that console can print
-        return "You are in " + roomMap.get(currentRoom).getName() + "\n" +
+        return "You are in " + currentRoom + "\n" +
                 "Description: " + roomMap.get(currentRoom).getDescription() + "\n" +
                 "Your current items: " + printItems(inventory) + "\n" +
                 "Items available in the room: " + printItemsDescription(roomMap.get(currentRoom).getItems()) + "\n" +
@@ -158,7 +158,7 @@ public class GameEngine {
         //must have "went" keyword if a successful go to other room
         if (result.equals("Went")) {
             //check if current room is equal to the last room
-            return roomMap.get(currentRoom).getName().equals("Jedi Temple");
+            return currentRoom.equals(layout.getEndingRoom());
         }
         return false;
     }
