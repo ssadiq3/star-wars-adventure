@@ -13,14 +13,27 @@ import static org.junit.Assert.assertEquals;
 
 public class GameEngineTest {
     private GameEngine game;
+
     @Before
     public void setUp() throws FileNotFoundException {
         game = new GameEngine("src/main/resources/starwars.json");
     }
 
     @Test
-    public void testValidGo() {
+    public void testSpaceInput() {
+        assertEquals("I can't complete that action!", game.checkCommand(" ", ""));
+    }
+    @Test
+    public void testValidGoNormal() {
         assertEquals("Went", game.checkCommand("go", "East"));
+    }
+    @Test
+    public void testValidGoWhiteSpace() {
+        assertEquals("Went", game.checkCommand("  go", "East  "));
+    }
+    @Test
+    public void testValidGOWithCAPS() {
+        assertEquals("Went", game.checkCommand("GO", "eaSt"));
     }
     @Test
     public void testInvalidGoNotDirection() {
@@ -31,13 +44,31 @@ public class GameEngineTest {
         assertEquals("I can't go west!", game.checkCommand("go", "West"));
     }
     @Test
-    public void testValidTake() {
+    public void testValidTakeNormal() {
         assertEquals("Took", game.checkCommand("take", "keys"));
     }
     @Test
-    public void testValidDrop() {
+    public void testValidTakeWhitespace() {
+        assertEquals("Took", game.checkCommand("  take ", "keys  "));
+    }
+    @Test
+    public void testValidTakeCAPS() {
+        assertEquals("Took", game.checkCommand("TAKE", "keYs"));
+    }
+    @Test
+    public void testValidDropNormal() {
         game.checkCommand("take", "keys");
         assertEquals("Dropped", game.checkCommand("drop", "keys"));
+    }
+    @Test
+    public void testValidDropWhitespace() {
+        game.checkCommand("take ", "keys");
+        assertEquals("Dropped", game.checkCommand("  drop", "keys "));
+    }
+    @Test
+    public void testValidDropCAPS() {
+        game.checkCommand("take ", "keys");
+        assertEquals("Dropped", game.checkCommand("dRoP", "KeYs"));
     }
     @Test
     public void testInvalidDropEmptyInventory() {
@@ -80,9 +111,4 @@ public class GameEngineTest {
     public void testQuitCommand() {
         assertEquals("quit", game.checkCommand("quit", ""));
     }
-
-
-
-
-
 }

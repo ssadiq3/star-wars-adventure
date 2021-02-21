@@ -10,7 +10,7 @@ public class Input {
     private String secondWord;
 
     public Input(String file) throws FileNotFoundException {
-        if (file == null) {
+        if (file == null || !file.equals("src/main/resources/starwars.json")) {
             throw new IllegalArgumentException();
         }
         game = new GameEngine(file); //creates game
@@ -50,7 +50,7 @@ public class Input {
         if (action.equals("quit") || action.equals("exit")) {
             //return true to stop runGame() loop if quit or exit
             return true;
-        } else if (action.equals("examine")) {
+        } else if (action.equals("examine") || action.equals("history")) {
             //empty second word if examine is command, continue loop
             secondWord = "";
         } else {
@@ -80,7 +80,7 @@ public class Input {
         }
         //check if game engine finds player has won and print end message if so
         if (game.isComplete(result)) {
-            System.out.println("Congratulations! You have reached the Jedi Temple, and you can now begin your training.");
+            System.out.println(game.winMessage());
             return true;
         }
         return false;

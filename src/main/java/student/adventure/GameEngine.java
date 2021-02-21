@@ -8,14 +8,15 @@ import java.io.FileReader;
 import java.util.*;
 
 public class GameEngine {
-    protected Layout layout;
-    public static Map<String, Room> roomMap;
-    public static String currentRoom;
-    protected List<Item> inventory;
+    private Layout layout;
+    private Map<String, Room> roomMap;
+    private static String currentRoom;
+    private List<Item> inventory;
+    private List<String> traversed;
 
     public GameEngine(String file) throws FileNotFoundException {
         //must be right file, otherwise need to throw exception
-        if (file == null || !(file.equals("src/main/resources/starwars.json"))) {
+        if (file == null) {
             throw new IllegalArgumentException();
         }
         Gson gson = new Gson();
@@ -25,6 +26,8 @@ public class GameEngine {
         roomMap = new HashMap<>();
         currentRoom = layout.getStartingRoom(); //first room
         inventory = new ArrayList<>(); //starts empty
+        traversed = new ArrayList<>();
+        traversed.add(layout.getStartingRoom()); //add first room
         //fill roomMap with room name and room object pairs
         for (Room room : layout.getRooms()) {
             roomMap.put(room.getName(), room);
@@ -38,6 +41,8 @@ public class GameEngine {
      * @return String result of appropriate method to send back to console
      */
     public String checkCommand(String action, String second) {
+        action = action.trim().toLowerCase();
+        second = second.trim().toLowerCase();
         //check if action is one of following commands
         if (action.equals("go")) {
             //run appropriate method on second input
@@ -80,6 +85,11 @@ public class GameEngine {
             for (Direction posDirection : roomMap.get(currentRoom).getDirections()) {
                 if (direction.equalsIgnoreCase(posDirection.getDirectionName())) {
                     currentRoom = posDirection.getRoom();
+                    traversed.add(currentRoom);
+                    if (currentRoom.equals("The Death Star") && !(printItems(inventory).contains("lightsaber"))) {
+                       return "You need the lightsaber from Yoda's forest to survive on the Death Star!\n" +
+                               "Go Southwest to return to Dagobah and reach Yoda's forest.";
+                    }
                     return "Went";
                 }
             }
@@ -161,6 +171,14 @@ public class GameEngine {
             return currentRoom.equals(layout.getEndingRoom());
         }
         return false;
+    }
+
+    /**
+     *
+     */
+    public String winMessage() {
+        return "Congratulations! You have reached the Jedi Temple, and you can now begin your training. + \n" +
+                "Here was your path: " + traversed;
     }
 
     /**

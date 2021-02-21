@@ -1,0 +1,55 @@
+{
+  "startingRoom": "Tatooine",
+  "endingRoom": "Jedi Temple",
+  "intro": "Hello player, welcome to Star Wars Adventure!\nYou are a young farmer living on Tatooine, but you have received a message that you have the abilities to become a Jedi, and the first step is to find Jedi Master Yoda on the planet Dagobah. \nGood luck and may the force be with you!",
+  "directions": [
+    {
+      "name": "Tatooine",
+      "description": "Tatooine is a desert planet isolated from the galaxy",
+      "items": [
+        {
+          "itemName": "keys",
+          "itemDescription": "Use these keys to fly your spaceship across planets"
+        }
+      ],
+      "rooms": [
+        {
+          "directionName": "East",
+          "room": "Jabba's Cave"
+        }
+      ]
+    },
+    {
+      "name": "Jabba's Cave",
+      "description": "You are in Jabba The Hutt's cave, he is a crime lord who rules over the planet Tatooine",
+      "rooms": [
+        {
+          "directionName": "West",
+          "room": "Tatooine"
+        },
+        {
+          "directionName": "Northeast",
+          "room": "Alderaan"
+        }
+      ]
+    },
+    {
+      "name": "Alderaan",
+      "description": "You are at Alderaan. You hear this planet is in danger of being destroyed by the Empire",
+      "rooms": [
+        {
+          "directionName": "South",
+          "room": "The Death Star"
+        },
+        {
+          "directionName": "Southwest",
+          "room": "Jabba's Cave"
+        },
+        {
+          "directionName": "East",
+          "room": "Dagobah"
+        }
+      ]
+    }
+  ]
+}

@@ -38,10 +38,6 @@
       "description": "You are at Alderaan. You hear this planet is in danger of being destroyed by the Empire",
       "directions": [
         {
-          "directionName": "South",
-          "room": "The Death Star"
-        },
-        {
           "directionName": "Southwest",
           "room": "Jabba's Cave"
         },
@@ -100,8 +96,8 @@
       ],
       "directions": [
         {
-          "directionName": "North",
-          "room": "Alderaan"
+          "directionName": "Southwest",
+          "room": "Dagobah"
         },
         {
           "directionName": "Down",
