@@ -1,5 +1,6 @@
 package student.server;
 
+import java.io.FileNotFoundException;
 import java.util.SortedMap;
 
 /**
@@ -15,14 +16,14 @@ public interface AdventureService {
      * Creates a new Adventure game and stores it.
      * @return the id of the game.
      */
-    int newGame() throws AdventureException;
+    int newGame() throws AdventureException, FileNotFoundException;
 
     /**
      * Returns the state of the game instance associated with the given ID.
      * @param id the instance id
      * @return the current state of the game
      */
-    GameStatus getGame(int id);
+    GameStatus getGame(int id) throws FileNotFoundException, AdventureException;
 
     /**
      * Removes & destroys a game instance with the given ID.
@@ -36,7 +37,7 @@ public interface AdventureService {
      * @param id the instance id
      * @param command the issued command
      */
-    void executeCommand(int id, Command command);
+    void executeCommand(int id, Command command) throws FileNotFoundException;
 
     /**
      * Returns a sorted leaderboard of player "high" scores.

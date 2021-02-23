@@ -13,7 +13,7 @@ public class Input {
         if (file == null || !file.equals("src/main/resources/starwars.json")) {
             throw new IllegalArgumentException();
         }
-        game = new GameEngine(file); //creates game
+        game = new GameEngine(); //creates game
         scanner = new Scanner(System.in);
         action = "";
         secondWord = "";

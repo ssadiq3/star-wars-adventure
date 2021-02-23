@@ -2,6 +2,7 @@ package student.adventure;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import student.server.GameStatus;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,13 +15,11 @@ public class GameEngine {
     private List<Item> inventory;
     private List<String> traversed;
 
-    public GameEngine(String file) throws FileNotFoundException {
+
+    public GameEngine() throws FileNotFoundException {
         //must be right file, otherwise need to throw exception
-        if (file == null) {
-            throw new IllegalArgumentException();
-        }
         Gson gson = new Gson();
-        JsonReader reader = new JsonReader(new FileReader(file));
+        JsonReader reader = new JsonReader(new FileReader("src/main/resources/starwars.json"));
         //deserialize into layout class
         layout = gson.fromJson(reader, Layout.class);
         roomMap = new HashMap<>();
@@ -53,10 +52,20 @@ public class GameEngine {
             return dropItem(second.toLowerCase());
         } if (action.equals("examine")) {
             return examine();
+        } if (action.equals("history")) {
+            return getTraversedRooms();
         } if (action.equals("quit") || action.equals("exit")) {
             return action;
         }
         return "I can't complete that action!";
+    }
+
+    public List<String> getInventoryNames() {
+        List<String> inventoryNames = new ArrayList<>();
+        for (Item item : inventory) {
+            inventoryNames.add(item.getItemName());
+        }
+        return inventoryNames;
     }
 
     /**
@@ -86,10 +95,6 @@ public class GameEngine {
                 if (direction.equalsIgnoreCase(posDirection.getDirectionName())) {
                     currentRoom = posDirection.getRoom();
                     traversed.add(currentRoom);
-                    if (currentRoom.equals("The Death Star") && !(printItems(inventory).contains("lightsaber"))) {
-                       return "You need the lightsaber from Yoda's forest to survive on the Death Star!\n" +
-                               "Go Southwest to return to Dagobah and reach Yoda's forest.";
-                    }
                     return "Went";
                 }
             }
@@ -104,7 +109,7 @@ public class GameEngine {
      */
     private String takeItem(String item) {
         //if room's items list is null or empty return error message for console to print
-        if (roomMap.get(currentRoom).getItems() == null || roomMap.get(currentRoom).getItems().size() == 0) {
+        if (roomMap.get(currentRoom).getItems().size() == 0) {
             return "This room does not have any items!";
         }
         //find and remove item in room's list of items and add to inventory, return succesful keyword
@@ -226,12 +231,32 @@ public class GameEngine {
         return toReturn.trim();
     }
 
+    public String getTraversedRooms() {
+        String toReturn = "";
+        for (String room : traversed) {
+            toReturn += room + ", ";
+        }
+        return toReturn;
+    }
+
+    public List<String> getTraversed() {
+        return traversed;
+    }
+
     /**
      * gets introduction of game
      * @return intro
      */
     public String getIntro() {
         return layout.getIntro();
+    }
+
+    public Room getCurrentRoom() {
+        return roomMap.get(currentRoom);
+    }
+
+    public String getVideoURL() {
+        return layout.getVideoURL();
     }
 
 }

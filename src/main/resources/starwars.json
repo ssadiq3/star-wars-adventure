@@ -2,10 +2,12 @@
   "startingRoom": "Tatooine",
   "endingRoom": "Jedi Temple",
   "intro": "Hello player, welcome to Star Wars Adventure!\nYou are a young farmer living on Tatooine, but you have received a message that you have the abilities to become a Jedi, and the first step is to find Jedi Master Yoda on the planet Dagobah. \nGood luck and may the force be with you!",
+  "videoURL": "https://www.youtube.com/watch?v=_D0ZQPqeJkk&ab_channel=Coltsrock56",
   "rooms": [
     {
       "name": "Tatooine",
       "description": "Tatooine is a desert planet isolated from the galaxy",
+      "imageURL": "https://i.pinimg.com/originals/e7/e6/6e/e7e66e9a5d91ee1b10cf2caa5d046590.jpg",
       "items": [
         {
           "itemName": "keys",
@@ -22,6 +24,8 @@
     {
       "name": "Jabba's Cave",
       "description": "You are in Jabba The Hutt's cave, he is a crime lord who rules over the planet Tatooine",
+      "imageURL": "https://wallpapercave.com/wp/wp3051820.jpg",
+      "items": [],
       "directions": [
         {
           "directionName": "West",
@@ -36,6 +40,8 @@
     {
       "name": "Alderaan",
       "description": "You are at Alderaan. You hear this planet is in danger of being destroyed by the Empire",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/databank_alderaan_01_169_4a5264e2.jpeg?region=0%2C0%2C1560%2C780",
+      "items": [],
       "directions": [
         {
           "directionName": "Southwest",
@@ -50,6 +56,8 @@
     {
       "name": "Dagobah",
       "description": "You are on Dagobah, here is the renowned Jedi Master Yoda",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/Dagobah_890df592.jpeg?region=391%2C39%2C830%2C467",
+      "items": [],
       "directions": [
         {
           "directionName": "West",
@@ -72,6 +80,7 @@
     {
       "name": "Yoda's Forest",
       "description": "You have found Yoda. He tells you you must destroy the Death Star and locate the Jedi Temple on Coruscant to become a Jedi Master",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/yodas-hut_a3d1133d.jpeg?region=0%2C75%2C1560%2C880&width=960",
       "items": [
         {
           "itemName": "lightsaber",
@@ -88,6 +97,7 @@
     {
       "name": "The Death Star",
       "description": "You're on the death star! This is an imperial weapon capable of destroying rebel planets. There are many stormtroopers here- a weapon may be of use",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/Death-Star-I-copy_36ad2500.jpeg?region=0%2C31%2C1600%2C800",
       "items": [
         {
           "itemName": "plans",
@@ -112,6 +122,8 @@
     {
       "name": "Control Room",
       "description": "This is the control room for the Death Star, you can destroy it from here.",
+      "imageURL": "https://i.redd.it/ptyvlilmng741.png",
+      "items": [],
       "directions": [
         {
           "directionName": "Up",
@@ -122,6 +134,7 @@
     {
       "name": "Hoth",
       "description": "Here is the rebel base, where you can inform them that the Death Star has been destroyed.",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/Hoth_d074d307.jpeg?region=0%2C38%2C1200%2C600",
       "items": [
         {
           "itemName": "uniform",
@@ -142,6 +155,7 @@
     {
       "name": "Naboo",
       "description": "Naboo is a planet home to the Gungans and ruled by very nice queens who know the galaxy's directions very well",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/databank_naboo_01_169_6cd7e1e0.jpeg?region=0%2C49%2C1560%2C780",
       "items": [
         {
           "itemName": "map",
@@ -166,6 +180,8 @@
     {
       "name": "Coruscant",
       "description": "You have reached Coruscant, on this planet is the primary Jedi Temple",
+      "imageURL": "https://lumiere-a.akamaihd.net/v1/images/Coruscant_03db43b4.jpeg?region=0%2C96%2C1536%2C768",
+      "items": [],
       "directions": [
         {
           "directionName": "South",
@@ -180,6 +196,8 @@
     {
       "name": "Jedi Temple",
       "description": "Congratulations! You've made it to the Jedi Temple where you can become a Jedi Master. Drop your cloak and lightsaber to to prove you are a padawan ready for training",
+      "imageURL": "https://static.wikia.nocookie.net/starwars/images/f/f0/JediTemple-Deceived.jpg/revision/latest?cb=20110608004827",
+      "items": [],
       "directions": [
         {
           "directionName": "South",

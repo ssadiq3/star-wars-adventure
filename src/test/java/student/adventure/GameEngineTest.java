@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import student.server.GameStatus;
 
 import java.io.FileNotFoundException;
 
@@ -16,7 +17,7 @@ public class GameEngineTest {
 
     @Before
     public void setUp() throws FileNotFoundException {
-        game = new GameEngine("src/main/resources/starwars.json");
+        game = new GameEngine();
     }
 
     @Test

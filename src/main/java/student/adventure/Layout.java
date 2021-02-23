@@ -5,12 +5,14 @@ public class Layout {
     private String endingRoom;
     private String intro;
     private Room[] rooms;
+    private String videoURL;
 
-    public Layout(String intro, String startingRoom, String endingRoom, Room[] room) {
+    public Layout(String intro, String startingRoom, String endingRoom, Room[] rooms, String videoURL) {
         this.intro = intro;
         this.startingRoom = startingRoom;
         this.endingRoom = endingRoom;
         this.rooms = rooms;
+        this.videoURL = videoURL;
     }
 
     public String getStartingRoom() {
@@ -27,5 +29,9 @@ public class Layout {
 
     public String getIntro() {
         return intro;
+    }
+
+    public String getVideoURL() {
+        return videoURL;
     }
 }

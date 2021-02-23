@@ -3,13 +3,14 @@ package student.server;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.FileNotFoundException;
 
 @Path("/")
 public class AdventureResource {
     /**
      * The single static adventure service instance used for this API.
      */
-    private static AdventureService service; // = new YourAdventureServiceHere();
+    private static AdventureService service = new StarWarsAdventure();
 
     /**
      * The API endpoint to test connectivity.
@@ -40,7 +41,7 @@ public class AdventureResource {
     @POST
     @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create() throws AdventureException {
+    public Response create() throws AdventureException, FileNotFoundException {
         int id = service.newGame();
         return getGame(id);
     }
@@ -53,7 +54,7 @@ public class AdventureResource {
     @GET
     @Path("instance/{id: \\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGame(@PathParam("id") int id) {
+    public Response getGame(@PathParam("id") int id) throws FileNotFoundException, AdventureException {
         GameStatus status = service.getGame(id);
         if (status == null) {
             return instanceNotFound(id);
@@ -87,7 +88,7 @@ public class AdventureResource {
     @Path("instance/{id: \\d+}/command")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response handleCommand(@PathParam("id") int id, Command command) {
+    public Response handleCommand(@PathParam("id") int id, Command command) throws FileNotFoundException, AdventureException {
         service.executeCommand(id, command);
 
         return getGame(id);

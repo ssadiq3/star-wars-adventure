@@ -38,7 +38,7 @@ public class JSONTest {
     }
     @Test
     public void testValidJSON() throws FileNotFoundException {
-        GameEngine game = new GameEngine("src/main/resources/starwars.json");
+        GameEngine game = new GameEngine();
         String examine = "You are in Tatooine" + "\n" +
                 "Description: Tatooine is a desert planet isolated from the galaxy"  + "\n" +
                 "Your current items: " + "\n" +
