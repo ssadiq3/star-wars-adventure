@@ -9,14 +9,13 @@ public class Room {
     private String description;
     private ArrayList<Item> items;
     private ArrayList<Direction> directions;
-    private String url;
+    private String imageUrl;
 
     public Room(String name, String description, ArrayList<Item> items, ArrayList<Direction> directions) {
         this.name = name;
         this.description = description;
         this.items = items;
         this.directions = directions;
-        this.url = url;
     }
 
     public String getName() {
@@ -55,5 +54,5 @@ public class Room {
         return itemNames;
     }
 
-    public String getUrl() { return url;}
+    public String getImageUrl() { return imageUrl; }
 }

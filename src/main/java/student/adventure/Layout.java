@@ -34,4 +34,5 @@ public class Layout {
     public String getVideoURL() {
         return videoURL;
     }
+
 }

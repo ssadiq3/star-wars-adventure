@@ -16,6 +16,10 @@ public class GameEngine {
     private List<String> traversed;
 
 
+    /**
+     * Sets objects from gson and creates lists and variables that are updated throughout
+     * @throws FileNotFoundException
+     */
     public GameEngine() throws FileNotFoundException {
         //must be right file, otherwise need to throw exception
         Gson gson = new Gson();
@@ -93,6 +97,7 @@ public class GameEngine {
             //find direction in list of possible directions, then update current room
             for (Direction posDirection : roomMap.get(currentRoom).getDirections()) {
                 if (direction.equalsIgnoreCase(posDirection.getDirectionName())) {
+                    System.out.println(posDirection.getRoom());
                     currentRoom = posDirection.getRoom();
                     traversed.add(currentRoom);
                     return "Went";
@@ -166,16 +171,11 @@ public class GameEngine {
 
     /**
      * Checks if player has reached final room after "go" command
-     * @param result passed result must be "went" keyword
      * @return true if game is over, false otherwise
      */
-    public boolean isComplete(String result) {
-        //must have "went" keyword if a successful go to other room
-        if (result.equals("Went")) {
-            //check if current room is equal to the last room
-            return currentRoom.equals(layout.getEndingRoom());
-        }
-        return false;
+    public boolean isComplete() {
+        //check if current room is equal to the last room
+        return currentRoom.equals(layout.getEndingRoom());
     }
 
     /**
@@ -231,16 +231,16 @@ public class GameEngine {
         return toReturn.trim();
     }
 
+    /**
+     * Gives printable version of traversed rooms for 'history' command
+     * @return traversed rooms
+     */
     public String getTraversedRooms() {
         String toReturn = "";
         for (String room : traversed) {
             toReturn += room + ", ";
         }
         return toReturn;
-    }
-
-    public List<String> getTraversed() {
-        return traversed;
     }
 
     /**
@@ -251,10 +251,18 @@ public class GameEngine {
         return layout.getIntro();
     }
 
+    /**
+     * Finds room object of string current room
+     * @return current room object
+     */
     public Room getCurrentRoom() {
         return roomMap.get(currentRoom);
     }
 
+    /**
+     * sound URL for API
+     * @return youtube video URL
+     */
     public String getVideoURL() {
         return layout.getVideoURL();
     }

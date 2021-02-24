@@ -4,12 +4,18 @@ package student.server;
 import student.adventure.GameEngine;
 
 import java.io.FileNotFoundException;
+import java.sql.ClientInfoStatus;
 import java.util.*;
 
 public class StarWarsAdventure implements AdventureService {
     private Map<Integer, GameEngine> games;
     private Integer id;
+    private String commandAction;
+    private String commandValue;
 
+    /**
+     * Creates games map and sets id to 0
+     */
     public StarWarsAdventure() {
         games = new HashMap<>();
         id = 0;
@@ -17,8 +23,8 @@ public class StarWarsAdventure implements AdventureService {
     /**
      * Resets the service to its initial state.
      */
-
     public void reset() {
+        //remove every id's game and reset id
         for (Integer posID : games.keySet()) {
             games.remove(posID);
         }
@@ -32,7 +38,7 @@ public class StarWarsAdventure implements AdventureService {
     public int newGame() throws AdventureException, FileNotFoundException {
         int currentID = id;
         GameEngine newGame = new GameEngine();
-        games.put(id, newGame);
+        games.put(id, newGame); //put new game in map
         id++;
         return currentID;
     }
@@ -43,33 +49,51 @@ public class StarWarsAdventure implements AdventureService {
      * @return the current state of the game
      */
     public GameStatus getGame(int id) throws FileNotFoundException, AdventureException {
+        //create variables for new game status variables
         GameEngine game = null;
         boolean error = true;
         String message = "";
-        String imageURL = "";
         String videoURL = "";
+        String imageURL = "";
         for (Integer posID : games.keySet()) {
             if (posID == id) {
-                game = games.get(posID);
-            } else {
-                game = null;
-                throw new AdventureException("Game with this id does not exist");
+                game = games.get(posID); //set game to given id
             }
         }
-        try {
+        //check if id doesn't exist
+        if (game == null) {
+            throw new AdventureException("id has no game");
+        }
+        Map<String, List<String>> commandOptions = new HashMap<>();
+        //put all commands in commandoptions map
+        List<String> historyList = new ArrayList<>();
+        historyList.add("");
+        //check if game is over
+        if (game.isComplete()) {
+            message = game.winMessage();
+            commandOptions = null;
+        } else {
+            commandOptions.put("go", game.getCurrentRoom().getDirectionNames());
+            commandOptions.put("take", game.getCurrentRoom().getItemNames());
+            commandOptions.put("drop", game.getInventoryNames());
+            commandOptions.put("history", historyList);
+        }
+        if (commandAction != null && commandAction.equals("history")) {
+            //need to add traversed rooms if command is history
+            message = game.getIntro() + "\n" + game.examine() + "\n" + game.getTraversedRooms();
+        } else {
             message = game.getIntro() + "\n" + game.examine();
-            imageURL = game.getCurrentRoom().getUrl();
+        }
+        try  {
+            //set all game status variables
+            imageURL = game.getCurrentRoom().getImageUrl();
             videoURL = game.getVideoURL();
             error = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Map<String, List<String>> commandOptions = new HashMap<>();
-        commandOptions.put("go", game.getCurrentRoom().getDirectionNames());
-        commandOptions.put("take", game.getCurrentRoom().getItemNames());
-        commandOptions.put("drop", game.getInventoryNames());
-        commandOptions.put("history", game.getTraversed());
         AdventureState state = new AdventureState();
+        //put all variables in new game status and return
         GameStatus status = new GameStatus(error, id, message, imageURL, videoURL, state, commandOptions);
         return status;
     }
@@ -79,7 +103,11 @@ public class StarWarsAdventure implements AdventureService {
      * @param id the instance id
      * @return false if the instance could not be found and/or was not deleted
      */
-    public boolean destroyGame(int id) {
+    public boolean destroyGame(int id) throws AdventureException {
+        //find game and remove from map
+        if (id < 0) {
+            throw new AdventureException("id can not be negative");
+        }
         for (Integer posID : games.keySet()) {
             if (posID == id) {
                 games.remove(posID);
@@ -95,19 +123,34 @@ public class StarWarsAdventure implements AdventureService {
      * @param command the issued command
      */
     public void executeCommand(int id, Command command) throws FileNotFoundException {
-        GameEngine game = new GameEngine();
+        commandAction = command.getCommandName();
+        commandValue = command.getCommandValue();
+        GameEngine game = null;
         for (Integer posID : games.keySet()) {
             if (posID == id) {
-                game = games.get(posID);
+                game = games.get(posID); //set game to given id game
             }
         }
+        //check if id has no game
+        if (game == null) {
+            throw new IllegalArgumentException("id has no game");
+        }
+        //run game engine check command on name and value
         game.checkCommand(command.getCommandName(), command.getCommandValue());
     }
 
     /**
-     * Returns a sorted leaderboard of player "high" scores.
-     * @return a sorted map of player names to scores
+     *  Not used
+     * @return Null
      */
     public SortedMap<String, Integer> fetchLeaderboard() { return null; }
+
+    /**
+     * Getter for games map
+     * @return games map
+     */
+    public Map<Integer, GameEngine> getGames() {
+        return games;
+    }
 }
 
